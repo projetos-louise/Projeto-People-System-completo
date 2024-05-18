@@ -7,6 +7,7 @@ import interfaces.Cadastramento;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Scanner;
 
 public class Funcionario extends Pessoa implements Cadastramento {
     private int matricula;
@@ -14,8 +15,9 @@ public class Funcionario extends Pessoa implements Cadastramento {
     private double salario;
     private LocalDate dataAdmissao;
 
-    public Funcionario() {
+    public Funcionario(String nome, String cpf, Cargo cargo) {
     }
+
     public Funcionario(String nome, LocalDate dataNascimento, Endereco endereco, ListaDeTelefonesNaoOrdenados telsContato, int matricula,
                        Cargo cargo, double salario, LocalDate dataAdmissao) {
         super(nome, dataNascimento, endereco, telsContato);
@@ -39,11 +41,13 @@ public class Funcionario extends Pessoa implements Cadastramento {
     }
 
     public void reajustarSalario(double percentual){
-        this.salario = this.salario * (1 + (percentual/100));
+        this.salario = this.salario * (1 + (percentual / 100));
     }
+
     public void promover(Cargo novoCargo){
         this.cargo = novoCargo;
     }
+
     public int getMatricula() { return matricula;}
 
     public void setMatricula(int matricula) {
@@ -76,6 +80,43 @@ public class Funcionario extends Pessoa implements Cadastramento {
 
     @Override
     public void cadastrar() {
+        Scanner scanner = new Scanner(System.in);
 
+        System.out.print("Nome: ");
+        String nome = scanner.nextLine();
+
+        System.out.print("Data de Nascimento (AAAA-MM-DD): ");
+        LocalDate dataNascimento = LocalDate.parse(scanner.nextLine());
+
+        System.out.print("Endereço: ");
+        Endereco endereco = new Endereco();
+
+        System.out.print("Telefone: ");
+        ListaDeTelefonesNaoOrdenados telsContato = new ListaDeTelefonesNaoOrdenados();
+
+        System.out.print("Matrícula: ");
+        int matricula = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("Cargo (0: ESTAGIARIO, 1: TRAINEE, 2: JUNIOR, 3: PLENO, 4: SENIOR, 5: ESPECIALISTA): ");
+        int cargoOrdinal = Integer.parseInt(scanner.nextLine());
+        Cargo cargo = Cargo.values()[cargoOrdinal];
+
+        System.out.print("Salário: ");
+        double salario = Double.parseDouble(scanner.nextLine());
+
+        System.out.print("Data de Admissão (AAAA-MM-DD): ");
+        LocalDate dataAdmissao = LocalDate.parse(scanner.nextLine());
+
+
+        this.setNome(nome);
+        this.setDataNascimento(dataNascimento);
+        this.setEndereco(endereco);
+        this.setTelsContato(telsContato);
+        this.setMatricula(matricula);
+        this.setCargo(cargo);
+        this.setSalario(salario);
+        this.setDataAdmissao(dataAdmissao);
+
+        System.out.println("Funcionário cadastrado com sucesso!");
     }
 }

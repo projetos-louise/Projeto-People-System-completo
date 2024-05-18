@@ -3,6 +3,10 @@ package composicoes;
 public class Profissao {
     private String nomeProfissao;
 
+    public Profissao(String nomeProfissao) {
+        this.nomeProfissao = nomeProfissao;
+    }
+
     public String getNomeProfissao() {
         return nomeProfissao;
     }

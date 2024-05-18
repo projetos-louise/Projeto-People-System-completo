@@ -1,61 +1,103 @@
 package apps;
 
-import composicoes.Endereco;
 import composicoes.Cargo;
-import contas.Conta;
-import contas.ContaEspecial;
-import contas.ContaInvestimento;
+import composicoes.Endereco;
 import estruturasdedados.ListaDeTelefonesNaoOrdenados;
 import pessoas.Cliente;
 import pessoas.Dependente;
 import pessoas.Funcionario;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 
-
-
 public class Main {
-
 	public static void main(String[] args) {
-////		Conta conta1 = new Conta(1, 1);
-//		ContaEspecial contaesp1 = new ContaEspecial(02, 02, 02);
-//		ContaInvestimento contaInv1 = new ContaInvestimento(03, 03, 03, 03);
-//
-////		conta1.numero = 1;
-////		conta1.saldo = 10000;
-////		conta1.depositar(10000);
-////		conta2.numero = 2;
-////		conta2.saldo = 20000;
-////
-////		contaesp1.numero = 01;
-////		contaesp1.saldo = 12000;
-////		contaInv1.numero = 02;
-////		contaInv1.saldo = 13000;
-//
-//		Conta conta1 = null;
-//		System.out.println("Número da conta 1: " + conta1.getNumero());
-//		System.out.println("Número da saldo 1: " + conta1.getSaldo());
-//
-//
-//
-//			Cliente cli1 = new Cliente();
-////        Endereco end1 = new Endereco();
-//			Dependente dep1 = new Dependente();
-//			dep1.setClienteParente(cli1);
-////        cli1.setEndereco(end1);
-//			Scanner input = new Scanner(System.in);
-//
-		Funcionario funcionario = new Funcionario("Louise",
-				LocalDate.of(2024, 5, 15), // Data de nascimento
-				new Endereco("Rua das Flores", "123", "Centro", "João Pessoa", "PB"),
-				new ListaDeTelefonesNaoOrdenados(),
-				1001, // Matrícula
-				Cargo.ESTAGIARIO, // Cargo
-				5000.0, // Salário
-				LocalDate.of(2021, 3, 10) // Data de admissão
-		);
+		Scanner scanner = new Scanner(System.in);
+		int option;
 
+		do {
+			System.out.println("==== MENU ====");
+			System.out.println("1. Cadastro de Funcionário");
+			System.out.println("2. Cadastro de Cliente");
+			System.out.println("3. Cadastro de Dependente");
+			System.out.println("0. Sair");
+			System.out.print("Selecione uma opção: ");
+			option = scanner.nextInt();
+
+			switch (option) {
+				case 1:
+					cadastrarFuncionario(scanner);
+					break;
+				case 2:
+					cadastrarCliente(scanner);
+					break;
+				case 3:
+					cadastrarDependente(scanner);
+					break;
+				case 0:
+					System.out.println("Saindo...");
+					break;
+				default:
+					System.out.println("Opção inválida. Tente novamente.");
+			}
+		} while (option != 0);
+
+		scanner.close();
 	}
 
+	private static void cadastrarFuncionario(Scanner scanner) {
+		scanner.nextLine();  // Consumir o newline
+		System.out.println("=== Cadastro de Funcionário ===");
+		System.out.print("Nome: ");
+		String nome = scanner.nextLine();
+		System.out.print("CPF: ");
+		String cpf = scanner.nextLine();
+		System.out.print("Cargo: ");
+		String cargoStr = scanner.nextLine();
+		Cargo cargo = Cargo.valueOf(cargoStr.toUpperCase());
+
+		Funcionario funcionario = new Funcionario(nome, cpf, cargo);
+		System.out.println("Funcionário cadastrado: " + funcionario);
+	}
+
+	private static void cadastrarCliente(Scanner scanner) {
+		scanner.nextLine();  // Consumir o newline
+		System.out.println("=== Cadastro de Cliente ===");
+		System.out.print("Nome: ");
+		String nome = scanner.nextLine();
+		System.out.print("CPF: ");
+		String cpf = scanner.nextLine();
+		System.out.print("Endereço: ");
+		String endereco = scanner.nextLine();
+
+		Cliente cliente = new Cliente(nome, cpf, endereco);
+		System.out.println("Cliente cadastrado: " + cliente);
+	}
+
+	private static void cadastrarDependente(Scanner scanner) {
+		scanner.nextLine();  // Consumir o newline
+		System.out.println("=== Cadastro de Dependente ===");
+		System.out.print("Nome: ");
+		String nome = scanner.nextLine();
+		System.out.print("Idade: ");
+		int idade = scanner.nextInt();
+		scanner.nextLine();  // Consumir o newline
+		System.out.print("Relacionamento: ");
+		String relacionamento = scanner.nextLine();
+		System.out.print("Nome do Cliente Parente: ");
+		String nomeClienteParente = scanner.nextLine();
+
+
+		Cliente clienteParente = buscarClientePorNome(nomeClienteParente);
+
+		if (clienteParente != null) {
+			Dependente dependente = new Dependente(nome, idade, relacionamento, clienteParente);
+			System.out.println("Dependente cadastrado: " + dependente);
+		} else {
+			System.out.println("Cliente parente não encontrado.");
+		}
+	}
+
+	private static Cliente buscarClientePorNome(String nomeCliente) {
+		return null;
+	}
 }

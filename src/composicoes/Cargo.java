@@ -1,6 +1,5 @@
 package composicoes;
 
 public enum Cargo {
-    ESTAGIARIO,    TRAINEE,    JUNIOR,
-    PLENO,    SENIOR,    ESPEC
+    ESTAGIARIO, TRAINEE, JUNIOR, PLENO, SENIOR, ESPECIALISTA
 }
