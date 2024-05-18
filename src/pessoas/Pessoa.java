@@ -7,10 +7,10 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class Pessoa {
-    private String nome;
-    private LocalDate dataNascimento;
-    private Endereco endereco;
-    private ListaDeTelefonesNaoOrdenados telsContato;
+    public String nome;
+    public LocalDate dataNascimento;
+    public Endereco endereco;
+    public ListaDeTelefonesNaoOrdenados telsContato;
     public Pessoa(){
         System.out.println("Criando uma pessoa" +
                 " sem atributos!");

@@ -13,16 +13,7 @@ public class Cliente extends Pessoa implements Cadastramento {
     private String codigo;
     private Profissao profissao;
 
-    public Cliente(String nome, String cpf, String endereco) {
-        // Construtor padrão
-    }
-
-    public Cliente(String nome, LocalDate dataNascimento, Endereco endereco, ListaDeTelefonesNaoOrdenados telsContato, String codigo, Profissao profissao) {
-        super(nome, dataNascimento, endereco, telsContato);
-        this.codigo = codigo;
-        this.profissao = profissao;
-    }
-
+    // Getters e Setters
     public String getCodigo() {
         return codigo;
     }
@@ -41,8 +32,13 @@ public class Cliente extends Pessoa implements Cadastramento {
 
     @Override
     public void cadastrar() {
-        Scanner scanner = new Scanner(System.in);
+        // Aqui você pode implementar a lógica para cadastrar um cliente, se necessário.
+        // Por enquanto, deixarei este método vazio.
+    }
 
+    @Override
+    public void realizarCadastroCliente() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("=== Cadastro de Cliente ===");
 
         // Nome
@@ -50,10 +46,11 @@ public class Cliente extends Pessoa implements Cadastramento {
         String nome = scanner.nextLine();
 
         // Data de nascimento
-        System.out.print("Data de Nascimento (dd/MM/yyyy): ");
+        System.out.print("Data de Nascimento (dd-MM-yyyy): ");
         String dataNascimentoStr = scanner.nextLine();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate dataNascimento = LocalDate.parse(dataNascimentoStr, formatter);
+
 
         // Endereço
         System.out.println("Endereço:");
@@ -61,7 +58,7 @@ public class Cliente extends Pessoa implements Cadastramento {
         String rua = scanner.nextLine();
         System.out.print("Número: ");
         int numero = scanner.nextInt();
-        scanner.nextLine(); // Consumir a nova linha restante
+        scanner.nextLine(); // Consumir o newline
         System.out.print("Cidade: ");
         String cidade = scanner.nextLine();
         System.out.print("Estado: ");
@@ -92,18 +89,13 @@ public class Cliente extends Pessoa implements Cadastramento {
         String nomeProfissao = scanner.nextLine();
         Profissao profissao = new Profissao(nomeProfissao);
 
-        // Configurar os dados no objeto atual
-        this.setNome(nome);
-        this.setDataNascimento(dataNascimento);
-        this.setEndereco(endereco);
-        this.setTelsContato(telsContato);
-        this.setCodigo(codigo);
-        this.setProfissao(profissao);
+        // Criar uma instância de Cliente com os dados fornecidos
+        Cliente cliente = new Cliente();
 
         System.out.println("Cliente cadastrado com sucesso!");
-        System.out.println(this);
-    }
 
+        scanner.close(); // Fechar o scanner após o uso
+    }
     @Override
     public String toString() {
         return "Cliente{" +
@@ -114,5 +106,15 @@ public class Cliente extends Pessoa implements Cadastramento {
                 ", endereco=" + getEndereco() +
                 ", telefones=" + getTelsContato() +
                 '}';
+    }
+
+    @Override
+    public void realizarCadastroFuncionario() {
+        // Implementação do método
+    }
+
+    @Override
+    public void realizarCadastroDependente() {
+        // Implementação do método
     }
 }

@@ -1,34 +1,30 @@
 package pessoas;
 
-import java.util.UUID;
+import java.util.Scanner;
 
 public class Dependente {
-    private UUID id;
-    private Cliente clienteParente;
     private String nome;
     private int idade;
     private String relacionamento;
+    private Cliente clienteParente;
 
+    // Construtor padrão
+    public Dependente() {
+        this.nome = "";
+        this.idade = 0;
+        this.relacionamento = "";
+        this.clienteParente = null;
+    }
+
+    // Construtor com parâmetros
     public Dependente(String nome, int idade, String relacionamento, Cliente clienteParente) {
-        this.id = UUID.randomUUID();
         this.nome = nome;
         this.idade = idade;
         this.relacionamento = relacionamento;
         this.clienteParente = clienteParente;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public Cliente getClienteParente() {
-        return clienteParente;
-    }
-
-    public void setClienteParente(Cliente clienteParente) {
-        this.clienteParente = clienteParente;
-    }
-
+    // Getters e Setters
     public String getNome() {
         return nome;
     }
@@ -53,14 +49,26 @@ public class Dependente {
         this.relacionamento = relacionamento;
     }
 
-    @Override
-    public String toString() {
-        return "Dependente{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", idade=" + idade +
-                ", relacionamento='" + relacionamento + '\'' +
-                ", clienteParente=" + clienteParente.getNome() +
-                '}';
+    public Cliente getClienteParente() {
+        return clienteParente;
+    }
+
+    public void setClienteParente(Cliente clienteParente) {
+        this.clienteParente = clienteParente;
+    }
+
+    // Método estático para realizar o cadastro de um dependente
+    public static Dependente realizarCadastroDependente(Scanner scanner) {
+        System.out.print("Nome: ");
+        String nomeDependente = scanner.nextLine();
+        System.out.print("Idade: ");
+        int idadeDependente = scanner.nextInt();
+        scanner.nextLine(); // Consumir o newline
+        System.out.print("Relacionamento: ");
+        String relacionamentoDependente = scanner.nextLine();
+        System.out.print("Nome do Cliente Parente: ");
+        String nomeClienteParente = scanner.nextLine();
+
+        return null;
     }
 }
